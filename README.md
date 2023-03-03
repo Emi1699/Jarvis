@@ -24,7 +24,7 @@ I have not tested it on Windows; do so at your own peril. Also, the instructions
 I am using python 3.9
 
 
-### How to run it
+## How to run it
 
 #### 1. Install the OpenAI library
 
