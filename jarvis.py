@@ -3,8 +3,8 @@ import modes
 import openai_api
 import threading
 
-WINDOW_WIDTH = 875
-WINDOW_HEIGHT = 550
+WINDOW_WIDTH = 1217
+WINDOW_HEIGHT = 825
 PADDING = 17
 
 BOX_COLOUR = 'black'
@@ -94,7 +94,7 @@ input_label = tk.Label(root, text="> query: ")
 input_label.configure(bg=BOX_COLOUR, fg=TEXT_COLOUR)
 input_label.pack()
 
-input_box = tk.Text(root, height=int(0.02 * WINDOW_HEIGHT), width=int(0.1 * WINDOW_WIDTH), wrap=tk.WORD)
+input_box = tk.Text(root, height=int(0.02 * WINDOW_HEIGHT), width=int(0.06 * WINDOW_WIDTH), wrap=tk.WORD, font=('Source code pro', 20))
 input_box.configure(padx=PADDING, pady=PADDING, bg=BOX_COLOUR, fg=TEXT_COLOUR,
                     highlightbackground=UNSELECTED_BOX_OUTLINE_COLOUR, highlightcolor=SELECTED_BOX_OUTLINE_COLOUR,
                     insertbackground=TEXT_COLOUR)
@@ -105,7 +105,7 @@ output_label = tk.Label(root, text="> answer: ")
 output_label.configure(bg=BOX_COLOUR, fg=TEXT_COLOUR)
 output_label.pack()
 
-output_box = tk.Text(root, height=int(0.03 * WINDOW_HEIGHT), width=int(0.1 * WINDOW_WIDTH), wrap=tk.WORD)
+output_box = tk.Text(root, height=int(0.015 * WINDOW_HEIGHT), width=int(0.06 * WINDOW_WIDTH), wrap=tk.WORD, font=('Source code pro', 20))
 output_box.configure(padx=PADDING, pady=PADDING, bg=BOX_COLOUR, fg=TEXT_COLOUR,
                      highlightbackground=UNSELECTED_BOX_OUTLINE_COLOUR, highlightcolor=SELECTED_BOX_OUTLINE_COLOUR,
                      insertbackground=TEXT_COLOUR)
