@@ -8,6 +8,8 @@ This project is also found inside my #machine-learning repository; I started dev
 
 Lots of improvements need to be done still, especially on the GUI side.
 
+## Disclaimer: there's lots of files in here; the ones you're interested in are config.py, jarvis.py and openai-api.py
+
 ## System Requirements
 
 This will almost certainly work on any UNIX-like system that supports the OpenAI library.
