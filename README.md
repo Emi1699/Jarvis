@@ -8,7 +8,12 @@ This project is also found inside my #machine-learning repository; I started dev
 
 Lots of improvements need to be done still, especially on the GUI side.
 
-## Disclaimer: there's lots of files in here; the ones you're interested in are config.py, jarvis.py and openai_api.py
+## Disclaimer: there's lots of files in here; the ones you're interested in are config.py, jarvis.py, openai_api.py and modes.py
+
+#### > config.py - here is where you'll keep your API_KEY (see step 2-4 below).
+#### > jarvis.py - GUI
+#### > openai_api - consume the OpenAI API
+#### > modes.py - I won't go into too much detail here (read the official docs to get a better idea); basically, this is the first message in a conversation and sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well; make sure to go to 
 
 ## System Requirements
 
