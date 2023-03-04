@@ -8,6 +8,8 @@ This project is also found inside my #machine-learning repository; I started dev
 
 Lots of improvements need to be done still, especially on the GUI side.
 
+#IMPORTANT: THERE IS A GENERATE BUTTON AT THE BOTTOM OF THE GUI! IF YOU DONT SEE IT, TRY CHANGING THE DIMENSION OF THE GUI, EITHER BY DRAGGING ITS MARGINS OR FROM THE CODE! STILL WORKING ON THIS!
+
 ## Disclaimer: there's lots of files in here; the ones you're interested in are config.py, jarvis.py, openai_api.py and modes.py
 
 #### > config.py - here is where you'll keep your API_KEY (see step 2-4 below).
