@@ -20,8 +20,8 @@ response_generation_complete = True
 
 def display_text(txt):
     for index, char in enumerate(txt):
-        # create a delay of 200 milliseconds before displaying each character
-        root.after(17 * index, append_text, char)
+        # create a delay of 17 milliseconds before displaying each character
+        root.after(10 * index, append_text, char)
 
 
 def append_text(char):
@@ -84,13 +84,28 @@ def generate_response(input_text):
     except Exception as e:
         print(e)
 
+# placeholder text inside the input box
+def handle_focus_in(event):
+    if input_box.get("1.0", "end-1c") == "What would you like to know?":
+        input_box.delete("1.0", "end-1c")
+        # self['fg'] = self.default_fg_color
+
+def handle_focus_out(event):
+    if not input_box.get("1.0", "end-1c"):
+        input_box.insert("1.0", "What would you like to know?")
+
+def handle_key(event):
+    if input_box.get("1.0", "end-1c") == "What would you like to know?":
+        input_box.delete("1.0", "end-1c")
+        # self['fg'] = self.default_fg_color
+
 
 root = tk.Tk()
 root.configure(bg='black')
 root.attributes("-alpha", 0.9)
 root.title("J.A.R.V.I.S")
 
-input_label = tk.Label(root, text="> query: ")
+input_label = tk.Label(root, text="> What would you like to know?", font=('Source code pro', 20))
 input_label.configure(bg=BOX_COLOUR, fg=TEXT_COLOUR)
 input_label.pack()
 
@@ -98,10 +113,12 @@ input_box = tk.Text(root, height=int(0.02 * WINDOW_HEIGHT), width=int(0.06 * WIN
 input_box.configure(padx=PADDING, pady=PADDING, bg=BOX_COLOUR, fg=TEXT_COLOUR,
                     highlightbackground=UNSELECTED_BOX_OUTLINE_COLOUR, highlightcolor=SELECTED_BOX_OUTLINE_COLOUR,
                     insertbackground=TEXT_COLOUR)
-input_box.insert('1.0', '$ ')
+input_box.bind("<FocusIn>", handle_focus_in)
+input_box.bind("<FocusOut>", handle_focus_out)
+input_box.bind("<Key>", handle_key)
 input_box.pack()
 
-output_label = tk.Label(root, text="> answer: ")
+output_label = tk.Label(root, text="> Answer: ", font=('Source code pro', 20))
 output_label.configure(bg=BOX_COLOUR, fg=TEXT_COLOUR)
 output_label.pack()
 
