@@ -13,9 +13,20 @@ Lots of improvements need to be done still, especially on the GUI side.
 ## About the files
 
 - `config.py`: Here is where you'll keep your API_KEY (see step 2-4 below).
-- `jarvis.py`: GUI
-- `openai_api`: Consume the OpenAI API
-- `modes.py`: This sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well; make sure to go to to line 26 in `openai_api.py` and use whatever mode you want for your app. (Read the official docs to get a better idea)
+- `jarvis.py`: GUI.
+- `openai_api`: Consume the OpenAI API.
+- `modes.py`: This sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well; make sure to go to line 26 in `openai_api.py` and use whatever mode you want for your app. (Read the official docs to get a better idea).
+
+## Usage
+
+Nothing much to see here, but just wanted to remind people that they can press:
+
+- `<return>` -> Generate response from JARVIS
+- `<return> + <shift>` -> add new line to the input box
+
+So it is just like any other input field out there.
+
+Also, you might need to scroll to view JARVIS's full response (just a reminder that you can do it :D).
 
 ## System Requirements
 
