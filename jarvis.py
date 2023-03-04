@@ -29,7 +29,10 @@ class Jarvis(tk.Tk):
                                  highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                  highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                  insertbackground=self.TEXT_COLOUR)
-        self.input_box.bind('<Shift-KeyPress>', lambda event: self.process_input())
+
+        # commands
+        self.input_box.bind('<Shift-KeyPress-Return>', lambda event: self.output_box.insert(tk.END, "\n")) # add new line
+        self.input_box.bind('<Return>', lambda event: self.process_input()) # generate response from Jarvis
 
         self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                   wrap=tk.WORD, font=('Source code pro', 20))
@@ -77,18 +80,19 @@ class Jarvis(tk.Tk):
         for index, char in enumerate(txt):
             # create a delay of 17 milliseconds before displaying each character
             self.after(10 * index, self.append_text, char)
+            self.output_box.see("end")  # Scroll to the end
 
     def append_text(self, char):
         self.output_box.insert(tk.END, char)
         self.output_box.tag_configure('white')
 
     def process_input(self):
-        if self.response_generation_complete:
+        if self.response_generation_complete and self.process_button.cget('state') == 'normal':
             self.response_generation_complete = False
             self.process_button.config(state=tk.DISABLED)
 
             input_text = self.input_box.get("1.0", "end-1c")  # Get the text from the input box
-            self.input_box.delete('1.0', tk.END)  # clear input box
+            # self.input_box.delete('1.0', tk.END)  # clear input box
 
             # clear output box
             self.output_box.delete("1.0", tk.END)
