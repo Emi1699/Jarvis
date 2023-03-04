@@ -3,7 +3,6 @@ import modes
 import openai_api
 import threading
 
-
 class Jarvis(tk.Tk):
 
     # constants used throughout the program
@@ -82,7 +81,6 @@ class Jarvis(tk.Tk):
         self.output_box.tag_configure('white')
 
     def process_input(self):
-
         if self.response_generation_complete:
             self.response_generation_complete = False
             self.process_button.config(state=tk.DISABLED)
@@ -127,7 +125,8 @@ class Jarvis(tk.Tk):
             self.output_box.delete("1.0", tk.END)  # Clear the output box
             self.display_text(output_text)
 
-            self.process_button.config(state=tk.NORMAL)
+            # Enable the "generate" button once the display_text method is done
+            self.after(len(output_text) * 10, self.process_button.config, {'state': tk.NORMAL})
 
         except Exception as e:
             print(e)
