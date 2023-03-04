@@ -29,6 +29,7 @@ class Jarvis(tk.Tk):
                                  highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                  highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                  insertbackground=self.TEXT_COLOUR)
+        self.input_box.bind('<Shift-KeyPress>', lambda event: self.process_input())
 
         self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                   wrap=tk.WORD, font=('Source code pro', 20))
