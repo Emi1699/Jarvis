@@ -16,12 +16,13 @@ class Jarvis(tk.Tk):
         super().__init__()
 
         self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.65)
-        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.65)
+        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.75)
         self.BOX_RELATIVE_WIDTH = 0.05 * self.WINDOW_WIDTH
-        self.BOX_RELATIVE_HEIGHT = 0.015 * self.WINDOW_HEIGHT
+        self.INPUT_BOX_RELATIVE_HEIGHT = 0.0075 * self.WINDOW_HEIGHT
+        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.021 * self.WINDOW_HEIGHT
 
         # text widgets, labels, and buttons
-        self.input_box = tk.Text(self, height=int(self.BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
+        self.input_box = tk.Text(self, height=int(self.INPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                  wrap=tk.WORD,
                                  font=('Source code pro', 20))
         self.input_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg='gray',
@@ -29,7 +30,7 @@ class Jarvis(tk.Tk):
                                  highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                  insertbackground=self.TEXT_COLOUR)
 
-        self.output_box = tk.Text(self, height=int(self.BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
+        self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                   wrap=tk.WORD, font=('Source code pro', 20))
         self.output_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR,
                                   highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
