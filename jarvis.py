@@ -106,7 +106,7 @@ class Jarvis(tk.Tk):
                     elif count == 3:
                         self.output_box.delete("1.0", tk.END)
                         self.output_box.insert(tk.END, ".")
-                    self.after(117, display_dots, (count % 3) + 1)
+                    self.after(150, display_dots, (count % 3) + 1)
 
             display_dots(1)
 
