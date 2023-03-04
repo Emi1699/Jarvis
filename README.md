@@ -8,8 +8,6 @@ This project is also found inside my #machine-learning repository; I started dev
 
 Lots of improvements need to be done still, especially on the GUI side.
 
-**IMPORTANT:** THERE IS A GENERATE BUTTON AT THE BOTTOM OF THE GUI! IF YOU DON'T SEE IT, TRY CHANGING THE DIMENSION OF THE GUI BY DRAGGING ITS BOTTOM SIDE DOWN.
-
 ## About the files
 
 - `config.py`: Here is where you'll keep your API_KEY (see step 2-4 below).
