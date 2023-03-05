@@ -15,6 +15,3 @@ chat_log.txt
 *.exe
 *.spec
 run_data/run_settings.json
-chat_log.txt
-config.py
-run_data/run_settings.json
