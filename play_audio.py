@@ -28,6 +28,9 @@ def text_to_audio(text="Hello, world! How's it going?"):
     dir_name = "mp3_responses/"
     file_name = f"prompt_response_{int(time.time())}.mp3"
 
+    if text[0] == ">":
+        text = text[1:]
+
     if VOICE_PROGRAM == "ELEVENLABS": # high quality, slow
         headers = {
             'accept': 'audio/mpeg',
