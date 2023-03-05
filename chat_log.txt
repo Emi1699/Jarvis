@@ -1,0 +1,17 @@
+J.A.R.V.I.S.: > How can you assist me today, User?
+User: How are you?
+J.A.R.V.I.S.: > As an AI, I don't have emotions, but I'm functioning properly and ready to assist you.
+User: How are you today?
+J.A.R.V.I.S.: > As an AI, I don't have emotions, but I'm functioning properly and ready to assist you.
+J.A.R.V.I.S.: > I'm sorry, but I need you to provide me with more information or a task that I can help you with.
+User: Hello.
+J.A.R.V.I.S.: > Hello, how can I assist you today?
+J.A.R.V.I.S.: > I'm sorry, I need you to provide me with a request or a question so that I can assist you.
+User: Hello there.
+J.A.R.V.I.S.: > Hello, how may I assist you today?
+J.A.R.V.I.S.: > I apologize, but in order for me to assist you, I need you to provide me with a question or request.
+User: How are you?
+J.A.R.V.I.S.: > As an AI, I don't have emotions, but I'm functioning properly and ready to assist you. How may I help you today?
+User: How are you today?
+J.A.R.V.I.S.: > I'm sorry but I cannot assist you unless you provide me with a specific request or question.
+J.A.R.V.I.S.: > As an AI, I don't have emotions, but I'm functioning properly and ready to assist you. Do you have a request or question that you'd like me to help you with?

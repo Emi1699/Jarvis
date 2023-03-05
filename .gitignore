@@ -10,7 +10,6 @@ build/JARVIS/warn-JARVIS.txt
 build/JARVIS/xref-JARVIS.html
 build/JARVIS/base_library.zip
 config.py
-config.py
 chat_log.txt
 *.exe
 *.spec

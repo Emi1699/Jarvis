@@ -2,7 +2,7 @@
 import openai
 import config
 
-USE_LOCAL = config.USE_LOCAL
+# USE_LOCAL = config.USE_LOCAL
 openai.api_key = config.OPENAI_API_KEY
 
 def convert_speech_to_text(mp3_file_path, mode):
@@ -24,11 +24,11 @@ def convert_speech_to_text(mp3_file_path, mode):
 
     audio_file = open(mp3_file_path, "rb")
 
-    if not USE_LOCAL:
-        if mode=="transcribe":
-            transcript = openai.Audio.transcribe("whisper-1", audio_file)
-        if mode=="translate":
-            transcript = openai.Audio.translate("whisper-1", audio_file)
+    # if not USE_LOCAL:
+    if mode=="transcribe":
+        transcript = openai.Audio.transcribe("whisper-1", audio_file)
+    if mode=="translate":
+        transcript = openai.Audio.translate("whisper-1", audio_file)
     # if USE_LOCAL:
     #     model = whisper.load_model(model_size, device=devices)
     #     if mode=="transcribe":
