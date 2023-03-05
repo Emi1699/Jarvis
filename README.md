@@ -12,7 +12,7 @@ Requires API access to ElevenLabs and OpenAI ChatGPT.
 
 Whisper is run locally.
 
-Tested and runs on Windows 10.
+Tested and runs on Windows 10, Python 3.7.16.
 
 End of notes by llfuller
 
