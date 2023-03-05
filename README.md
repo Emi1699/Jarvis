@@ -1,13 +1,21 @@
 # J.A.R.V.I.S.
 
 #======================================
+
 Notes by llfuller:
+
 Forked from github user Emi1699.
+
 Adds Whisper speech to text and ElevenLabs AI text to speech for seamless verbal conversation. Updates GUI accordingly.
+
 Requires API access to ElevenLabs and OpenAI ChatGPT. 
+
 Whisper is run locally.
+
 Tested and runs on Windows 10.
+
 End of notes by llfuller
+
 #======================================
 
 Just A Really Very Intelligent System :)
