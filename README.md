@@ -6,11 +6,11 @@ Modification notes by llfuller:
 
 Forked from github user Emi1699.
 
-Adds Whisper speech to text and ElevenLabs AI text to speech for seamless verbal conversation. Updates GUI accordingly.
+Adds Whisper speech-to-text and ElevenLabs or Google text-to-speech for seamless verbal conversation. Updates GUI accordingly.
 
 Requires API access to ElevenLabs and OpenAI ChatGPT. 
 
-Whisper is run locally.
+Whisper can be run locally (just uncomment the relevant code), but for speed purposes is run online by default.
 
 Tested and runs on Windows 10, Python 3.7.16.
 
