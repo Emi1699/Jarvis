@@ -72,11 +72,12 @@ class Jarvis(tk.Tk):
         self.play_audio_boolean = False
         run_settings_location = "run_data/run_settings.json"
         if os.path.exists(run_settings_location):
-            with open(run_settings_location, 'r') as file:
+            with open(run_settings_location, 'r', encoding='utf-8') as file:
                 file_contents = json.load(file)
                 self.play_audio_boolean = file_contents["play_audio_boolean"]
 
         self.chat_log = ""
+        self.chat_log_start_time = int(time.time())
 
     def configure_main_window(self):
 
@@ -155,7 +156,7 @@ class Jarvis(tk.Tk):
 
             print("J.A.R.V.I.S.: "+output_text)
             self.chat_log += "J.A.R.V.I.S.: "+output_text + "\n"
-            with open("chat_log.txt", "w") as file:
+            with open(f"chat_logs/chat_log{self.chat_log_start_time}.txt", "w", encoding='utf-8') as file:
                 file.write(self.chat_log)
 
             # display response
@@ -239,7 +240,7 @@ class Jarvis(tk.Tk):
         speech_to_text_result = speech_to_text.convert_speech_to_text(file_location, mode="transcribe")
         print("User: " + speech_to_text_result)
         self.chat_log += "User: " + speech_to_text_result+"\n"
-        with open("chat_log.txt", "w") as file:
+        with open(f"chat_logs/chat_log{self.chat_log_start_time}.txt", "w", encoding='utf-8') as file:
             file.write(self.chat_log)
         self.input_box.insert(tk.END, speech_to_text_result)
         self.generate_response(speech_to_text_result)
