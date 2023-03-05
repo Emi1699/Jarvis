@@ -4,6 +4,7 @@ import time
 import config
 
 VOICE_ID = config.VOICE_ID
+
 def text_to_audio(text="Hello, world! How's it going?"):
     """
     :param text: str of text to convert to audio

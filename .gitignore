@@ -1,3 +1,17 @@
 /.idea
 /__pycache__
 *.mp3
+*.toc
+*.pyc
+*.pkg
+*.manifest
+build/JARVIS/PYZ-00.pyz
+build/JARVIS/warn-JARVIS.txt
+build/JARVIS/xref-JARVIS.html
+build/JARVIS/base_library.zip
+config.py
+config.py
+chat_log.txt
+*.exe
+*.spec
+run_data/run_settings.json
