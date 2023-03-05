@@ -3,7 +3,6 @@ import playsound
 import time
 import config
 
-"""Made by llfuller with much help from ChatGPT"""
 VOICE_ID = config.VOICE_ID
 def text_to_audio(text="Hello, world! How's it going?"):
     """

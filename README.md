@@ -2,7 +2,7 @@
 
 #======================================
 
-Notes by llfuller:
+Modification notes by llfuller:
 
 Forked from github user Emi1699.
 
@@ -14,7 +14,7 @@ Whisper is run locally.
 
 Tested and runs on Windows 10, Python 3.7.16.
 
-End of notes by llfuller
+End of modification notes by llfuller
 
 #======================================
 

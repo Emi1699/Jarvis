@@ -1,7 +1,5 @@
 import whisper
 
-"""Made by llfuller with much help from ChatGPT"""
-
 def convert_speech_to_text(mp3_file_path, mode):
     """
     Here, we will be using openai to make the API call to convert speech to text.
