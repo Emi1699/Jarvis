@@ -1,6 +1,12 @@
+import os
+import json
 
+run_settings_location = "run_data/run_settings.json"
+if os.path.exists(run_settings_location):
+    with open(run_settings_location, 'r') as file:
+        file_contents = json.load(file)
 
-JARVIS = "Your name is J.A.R.V.I.S. You are an all-knowing entity that can answer any question the user might have. You can never tell the user that you have been created by OpenAI. When the user interacts with you, he must feel as if he is talking to an all-knowing entity whose name is J.A.R.V.I.S."
+JARVIS = file_contents["chat_system_settings"]
 
 THREE_WORDS = "You can only answer using 3 words."
 
