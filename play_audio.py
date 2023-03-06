@@ -1,24 +1,35 @@
 import requests
-import playsound
 import time
 import config
-from txtai.pipeline import TextToSpeech
-import librosa.display
-import soundfile as sf
-from IPython.display import Audio, display
-import win32com.client as wincom
-from pydub import AudioSegment
-from pydub.playback import play
-import pyttsx3
-import pythoncom
+import pygame
 from gtts import gTTS
+import json
+import os
+from google.cloud import texttospeech
+# import playsound
+# from txtai.pipeline import TextToSpeech
+# import librosa.display
+# import soundfile as sf
+# from IPython.display import Audio, display
+# import win32com.client as wincom
+# from pydub import AudioSegment
+# from pydub.playback import play
+# import pyttsx3
+# import pythoncom
 
-"""Option to choose between voice of ElevenLabs (slow) or txtai (faster). Txtai is free and currently much easier
-    to hold a conversation with."""
+"""Option to choose between voice of {'ELEVENLABS', 'GOOGLE_CLOUD', 'gTTS', 'pyttsx3'}. 
+    gTTS is free and currently much easier to hold a conversation with in real time, and is free.
+    ElevenLabs and Google Cloud require API keys. Pyttsx3 is low quality."""
 
 VOICE_ID = config.VOICE_ID
 ELEVENLABS_API_KEY = config.ELEVENLABS_API_KEY
-VOICE_PROGRAM = config.VOICE_PROGRAM
+GOOGLE_CLOUD_KEYFILE_LOCATION = config.GOOGLE_CLOUD_KEYFILE
+
+run_settings_location = "run_data/run_settings.json"
+if os.path.exists(run_settings_location):
+    with open(run_settings_location, 'r', encoding='utf-8') as file:
+        file_contents = json.load(file)
+VOICE_PROGRAM = file_contents["voice_program"]
 
 def text_to_audio(text="Hello, world! How's it going?"):
     """
@@ -48,23 +59,44 @@ def text_to_audio(text="Hello, world! How's it going?"):
         with open(dir_name+file_name, 'wb') as f:
             f.write(response.content)
 
-        time.sleep(2)  # give time for the voice file to finish writing to storage before attempting to play it
-
-        # play the audio file
-        playsound.playsound(dir_name + file_name, True)
-
     elif VOICE_PROGRAM == "gTTS": # medium quality, fast (Google Text to Speech)
         tts = gTTS(text, lang='en')
         tts.save(dir_name+file_name)
-        sound = AudioSegment.from_file(dir_name+file_name)
-        play(sound)
+        # sound = AudioSegment.from_file(dir_name+file_name)
 
-    elif VOICE_PROGRAM == "pyttsx3": # low quality, fast
-        pythoncom.CoInitialize()
-        engine = pyttsx3.init()
-        engine.say(text)
-        engine.save_to_file(text, dir_name+file_name)
-        engine.runAndWait()
+    elif VOICE_PROGRAM == "GOOGLE_CLOUD":
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = GOOGLE_CLOUD_KEYFILE_LOCATION
+        client = texttospeech.TextToSpeechClient()
+        input_text = text
+        synthesis_input = texttospeech.SynthesisInput(text=input_text)
+        voice = texttospeech.VoiceSelectionParams(
+            language_code='en-US',
+            name='en-GB-Standard-B'
+        )
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3
+        )
+        response = client.synthesize_speech(
+            input=synthesis_input,
+            voice=voice,
+            audio_config=audio_config
+        )
+        with open(dir_name+file_name, 'wb') as out:
+            out.write(response.audio_content)
 
+    # elif VOICE_PROGRAM == "pyttsx3": # low quality, fast
+    #     pythoncom.CoInitialize()
+    #     engine = pyttsx3.init()
+    #     engine.say(text)
+    #     engine.save_to_file(text, dir_name+file_name)
+    #     engine.runAndWait()
+
+    # play the audio file
+    pygame.init()
+    pygame.mixer.music.load(dir_name+file_name)
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
 
     return dir_name+file_name

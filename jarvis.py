@@ -82,11 +82,10 @@ class Jarvis(tk.Tk):
     def configure_main_window(self):
 
         self.configure(bg='black')  # background color
-        self.attributes("-alpha", 0.9)  # make it a bit transparent; higher value means less transparent
+        self.attributes("-alpha", 0.95)  # make it a bit transparent; higher value means less transparent
         self.title("J.A.R.V.I.S")
 
         self.geometry(f'{self.WINDOW_WIDTH}x{self.WINDOW_HEIGHT}')
-
         # pack widgets inside parent widget (main_window)
         self.input_label.pack()
         self.input_box.pack()
@@ -204,7 +203,7 @@ class Jarvis(tk.Tk):
         FORMAT = pyaudio.paInt16
         CHANNELS = 1
         RATE = 44100
-        RECORD_SECONDS = 5
+        RECORD_SECONDS = 900
 
         audio = pyaudio.PyAudio()
 
