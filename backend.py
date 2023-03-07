@@ -34,7 +34,7 @@ Create output directories and files.
 This CERTAINLY needs improvements, but not now because it's late and I'm tired as fuck.
 '''
 dir_name = "Conversations"  # name of the directory where the saved convo will be
-convo_file_name = str(datetime.datetime.now())  # name of the file where the convo is stored
+convo_file_name = str(datetime.datetime.now()) + '.txt'  # name of the file where the convo is stored
 print(convo_file_name)
 
 # get the path of the directory containing the Python file
