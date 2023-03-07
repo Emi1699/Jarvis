@@ -10,6 +10,7 @@ import os
 import speech_to_text
 from pydub import AudioSegment
 from pydub.playback import _play_with_simpleaudio as play
+import identify_language
 import json
 
 class Jarvis(tk.Tk):
@@ -24,8 +25,8 @@ class Jarvis(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.65)
-        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.85)
+        self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.55)
+        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.75)
         self.BOX_RELATIVE_WIDTH = 0.05 * self.WINDOW_WIDTH
         self.INPUT_BOX_RELATIVE_HEIGHT = 0.0065 * self.WINDOW_HEIGHT
         self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.018 * self.WINDOW_HEIGHT
@@ -35,7 +36,7 @@ class Jarvis(tk.Tk):
         # text widgets, labels, and buttons
         self.input_box = tk.Text(self, height=int(self.INPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                  wrap=tk.WORD,
-                                 font=('Source code pro', self.font_size))
+                                 font=('Source code pro', self.font_size-2))
         self.input_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg='gray',
                                  highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                  highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
@@ -46,7 +47,7 @@ class Jarvis(tk.Tk):
         self.input_box.bind('<Return>', lambda event: self.process_input()) # generate response from Jarvis
 
         self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
-                                  wrap=tk.WORD, font=('Source code pro', self.font_size))
+                                  wrap=tk.WORD, font=('Source code pro', self.font_size-2))
         self.output_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR,
                                   highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                   highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
@@ -162,9 +163,10 @@ class Jarvis(tk.Tk):
             self.output_box.configure(state='normal')
             self.output_box.delete("1.0", tk.END)  # Clear the output box
             self.display_text(output_text)
+            language_code = identify_language.identify_language(output_text)
 
             if self.play_audio_boolean:
-                self.answer_file_location_list = [text_to_audio(text=output_text)]
+                self.answer_file_location_list = [text_to_audio(text=output_text, language=language_code)]
 
             # Enable the "generate" button once the display_text method is done
             self.after(len(output_text) * 10, self.process_button.config, {'state': tk.NORMAL})
@@ -203,7 +205,7 @@ class Jarvis(tk.Tk):
         FORMAT = pyaudio.paInt16
         CHANNELS = 1
         RATE = 44100
-        RECORD_SECONDS = 900
+        RECORD_SECONDS = 600
 
         audio = pyaudio.PyAudio()
 
@@ -233,7 +235,6 @@ class Jarvis(tk.Tk):
         wave_file.setframerate(RATE)
         wave_file.writeframes(b''.join(frames))
         wave_file.close()
-        time.sleep(1)
 
         # Show processed speech to text in input box.
         speech_to_text_result = speech_to_text.convert_speech_to_text(file_location, mode="transcribe")

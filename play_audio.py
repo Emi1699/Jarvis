@@ -31,7 +31,7 @@ if os.path.exists(run_settings_location):
         file_contents = json.load(file)
 VOICE_PROGRAM = file_contents["voice_program"]
 
-def text_to_audio(text="Hello, world! How's it going?"):
+def text_to_audio(text="Hello, world! How's it going?",language='en'):
     """
     :param text: str of text to convert to audio
     :return: str of "directory/filename.mp3"
@@ -69,9 +69,34 @@ def text_to_audio(text="Hello, world! How's it going?"):
         client = texttospeech.TextToSpeechClient()
         input_text = text
         synthesis_input = texttospeech.SynthesisInput(text=input_text)
+        if language == 'vi':
+            lang_code = 'vi-VN'
+            name_code = 'vi-VN-Standard-B'
+        elif language == 'es':
+            lang_code = 'es-ES'
+            name_code = 'es-ES-Standard-B'
+        elif language == 'de':
+            lang_code = 'de-DE'
+            name_code = 'de-DE-Standard-B'
+        elif language == 'fr':
+            lang_code = 'fr-FR'
+            name_code = 'fr-FR-Standard-B'
+        elif language == 'zh-cn':
+            lang_code = 'yue-HK'
+            name_code = 'yue-HK-Standard-B'
+        elif language == 'nl':
+            lang_code = 'nl-NL'
+            name_code = 'nl-NL-Standard-B'
+        elif language == 'ru':
+            lang_code = 'ru-RU'
+            name_code = 'ru-RU-Standard-B'
+        else:
+            lang_code = 'en-US'
+            name_code = 'en-GB-Standard-B'
+
         voice = texttospeech.VoiceSelectionParams(
-            language_code='en-US',
-            name='en-GB-Standard-B'
+            language_code = lang_code,
+            name = name_code
         )
         audio_config = texttospeech.AudioConfig(
             audio_encoding=texttospeech.AudioEncoding.MP3
