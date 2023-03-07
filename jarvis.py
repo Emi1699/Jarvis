@@ -2,9 +2,10 @@ import tkinter as tk
 import modes
 import openai_api
 import threading
+import os
+
 
 class Jarvis(tk.Tk):
-
     # constants used throughout the program
     PADDING = 17
     BOX_COLOUR = 'black'
@@ -31,8 +32,9 @@ class Jarvis(tk.Tk):
                                  insertbackground=self.TEXT_COLOUR)
 
         # commands
-        self.input_box.bind('<Shift-KeyPress-Return>', lambda event: self.output_box.insert(tk.END, "\n")) # add new line
-        self.input_box.bind('<Return>', lambda event: self.process_input()) # generate response from Jarvis
+        self.input_box.bind('<Shift-KeyPress-Return>',
+                            lambda event: self.output_box.insert(tk.END, "\n"))  # add new line
+        self.input_box.bind('<Return>', lambda event: self.process_input())  # generate response from Jarvis
 
         self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                   wrap=tk.WORD, font=('Source code pro', 20))
@@ -122,7 +124,7 @@ class Jarvis(tk.Tk):
     def generate_response(self, input_text):
         try:
             # generate chatbot response
-            output_text = openai_api.text_text(input_text)
+            output_text = openai_api.get_jarvis_response_for(input_text)
             output_text = "> " + output_text
             self.response_generation_complete = True
 
@@ -138,6 +140,35 @@ class Jarvis(tk.Tk):
             print(e)
 
 
+# def write_conversation_to_file(lst):
+#     # get the path of the directory containing the Python file
+#     file_path = os.path.dirname(os.path.realpath(__file__))
+#
+#     # define the name of the directory to be created
+#     dir_name = "Conversations"
+#     convo_file_name = 'last_convo.txt'
+#
+#     # define the path of the new directory
+#     dir_path = os.path.join(file_path, dir_name)
+#
+#     if not os.path.exists(dir_path):
+#         os.mkdir(dir_path)
+#
+#     user = True
+#
+#     with open(os.path.join(dir_path, convo_file_name), 'w') as fl:
+#         for el in lst:
+#             if el['role'] == 'system': continue #ignore system message
+#
+#             if user:
+#                 fl.write('> user: ' + el['content'] + "\n")
+#             else:
+#                 fl.write('> jarvis: ' + el['content'] + "\n")
+#
+#             user = not user
+
+
 if __name__ == "__main__":
     jarvis = Jarvis()
     jarvis.run()
+    # write_conversation_to_file(openai_api.messages)

@@ -1,6 +1,7 @@
 import openai
 import config
 import modes
+import os
 
 openai.api_key = config.OPENAI_API_KEY
 
@@ -52,26 +53,41 @@ def audio_text(audio):
     return chat_transcript + "\n\n" + response['usage']['total_tokens']
 
 
-def text_text(user_text):
+def get_jarvis_response_for(user_text):
     global messages
 
+    # get the path of the directory containing the Python file
+    file_path = os.path.dirname(os.path.realpath(__file__))
+
+    # define the name of the directory to be created
+    dir_name = "Conversations"
+    convo_file_name = 'last_convo.txt'
+
+    # define the path of the new directory
+    dir_path = os.path.join(file_path, dir_name)
+
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+
+    # process text and write replies to file
     messages.append({"role": "user", "content": user_text})
+
+    # clear file before writing to it
+    with open(os.path.join(dir_path, convo_file_name), 'w') as fl:
+        fl.close()
+
+    # append user's reply to txt file
+    with open(os.path.join(dir_path, convo_file_name), 'a') as fl:
+        fl.write("> user: " + user_text + "\n\n")
 
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
 
     system_message = response['choices'][0]['message']['content']
 
-    # subprocess.call(['say', system_message])
-
     messages.append({"role": "assistant", "content": system_message})
 
-    # in case we want to display the full history
+    # append JARVIS' reply to txt file
+    with open(os.path.join(dir_path, convo_file_name), 'a') as fl:
+        fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
 
-    # chat_transcript = ""
-    # for message in messages:
-    #     if message['role'] != 'system':
-    #         chat_transcript += message['role'] + ": " + message['content'] + "\n\n"
-
-    # print(response['usage']['total_tokens'])
-
-    return messages[-1]['content'] # return last message in the list, which should be the bot's response
+    return messages[-1]['content']  # return last message in the list, which should be the bot's response
