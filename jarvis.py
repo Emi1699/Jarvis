@@ -1,6 +1,6 @@
 import tkinter as tk
 import modes
-import openai_api
+import backend
 import threading
 import os
 
@@ -124,7 +124,7 @@ class Jarvis(tk.Tk):
     def generate_response(self, input_text):
         try:
             # generate chatbot response
-            output_text = openai_api.get_jarvis_response_for(input_text)
+            output_text = backend.get_jarvis_response_for(input_text)
             output_text = "> " + output_text
             self.response_generation_complete = True
 
