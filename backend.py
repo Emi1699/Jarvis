@@ -1,9 +1,30 @@
 import openai
+
+import categories
 import config
 from modes import Modes
 import os
-import datetime
 
+# API-key; file in which it resides is not tracked by GIT
+openai.api_key = config.OPENAI_API_KEY
+
+
+def generate_category_and_filename(user_first_message):
+    messages = [{"role": "system", "content": Modes.ENCODER.value},
+                {"role": "user", "content": user_first_message}]
+
+    msg = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)['choices'][0]['message']['content']
+
+    category = msg[:msg.index(",")]
+    summary = msg[msg.index(",") + 1:]
+
+    return category, summary
+
+
+#
+# cat, summ = generate_category_and_filename("what should i WEAR TOMORROW")
+#
+# print(cat, summ)
 
 class Agent:
 
@@ -13,8 +34,7 @@ class Agent:
 
             In order for our bot to make sense, it needs to have an idea of the history of our conversations.
             For that reason, we need to store each reply (both from the user and from the chatbot; for now we will
-            store it
-            in an array, might look into using a database in the future).
+            store it in an array, might look into using a database in the future).
 
             There are 3 possible roles that an entity can have in a conversation:
                 1. 'system' - this sets the tone of the chatbot and the way it will 'behave' (see below example)
@@ -25,44 +45,50 @@ class Agent:
         """
 
         # this is where we will store the whole conversation between the chatbot and the user
-        self.messages = [{"role": "system", "content": Modes.JARVIS}]
-
+        self.messages = [{"role": "system", "content": Modes.JARVIS.value}]
         # API-key; file in which it resides is not tracked by GIT
         openai.api_key = config.OPENAI_API_KEY
 
         '''
         Create output directories and files.
-
         This CERTAINLY needs improvements, but not now because it's late and I'm tired as fuck.
         '''
-        self.dir_name = "Conversations"  # name of the directory where the saved convo will be
-        self.convo_file_name = str(datetime.datetime.now()).replace(":", "_") + '.txt'  # name of the file where the
-        # convo is stored
-
         # get the path of the directory containing the Python file
         self.current_working_directory = os.path.dirname(os.path.realpath(__file__))
+        self.conversations_directory = self.current_working_directory + "/Conversations"
 
-        # define the path of the new directory
-        self.dir_path = os.path.join(self.current_working_directory, self.dir_name)
+        # create the 'Conversations' directory if it does not exist
+        if not os.path.exists(self.conversations_directory):
+            os.mkdir(self.conversations_directory)
 
-        # define the path of the convo file inside the above directory
-        self.file_path = os.path.join(self.dir_path, self.convo_file_name)
+        # both of the following variables will be set after the user's first message
+        self.output_summary_file = ""  # define the path of the convo file inside the above directory
+        self.output_category_dir = ""  # name of the directory where the saved convo will be
 
-        if not os.path.exists(self.dir_path):
-            os.mkdir(self.dir_path)
+        # final output file after combining the category dir with the summary file
+        self.final_output_file = ""
 
-            # clear file before writing to it
-            with open(self.file_path, 'w', encoding='utf-8') as fl:
-                fl.close()
+        self.first_message = True  # used to set the name of the output file after the user's first message
 
     # call the API with the prompt from the user and save each reply to a file
     def get_response_for(self, user_text):
-
         # process text and write replies to file
         self.messages.append({"role": "user", "content": user_text})
 
+        # if this was the user's first message in a conversation, create the conversation's output file
+        if self.first_message:
+            self.output_category_dir, self.output_summary_file = generate_category_and_filename(user_text)
+
+            # check if output category directory exists; if not, create it
+            if not os.path.exists(os.path.join(self.conversations_directory, self.output_category_dir)):
+                os.mkdir(os.path.join(self.conversations_directory, self.output_category_dir))
+
+            self.final_output_file = os.path.join(os.path.join(self.conversations_directory, self.output_category_dir), self.output_summary_file)
+
+            self.first_message = False
+
         # append user's reply to txt file
-        with open(self.file_path, 'a', encoding='utf-8') as fl:
+        with open(self.final_output_file, 'a', encoding='utf-8') as fl:
             fl.write("> user: " + user_text + "\n\n")
 
         # this is where we call the API
@@ -73,11 +99,9 @@ class Agent:
         self.messages.append({"role": "assistant", "content": system_message})
 
         # append JARVIS' reply to txt file
-        with open(self.file_path, 'a', encoding='utf-8') as fl:
+        with open(self.final_output_file, 'a', encoding='utf-8') as fl:
             fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
 
         return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
 
-
-
-
+    # generate a filename to save the output to (just like chatGPT does) and a category chosen from a list
