@@ -1,4 +1,6 @@
 import openai
+
+import categories
 import config
 from modes import Modes
 import os
@@ -25,7 +27,7 @@ class Agent:
         """
 
         # this is where we will store the whole conversation between the chatbot and the user
-        self.messages = [{"role": "system", "content": Modes.ENCODER}]
+        self.messages = [{"role": "system", "content": Modes.JARVIS}]
 
         # API-key; file in which it resides is not tracked by GIT
         openai.api_key = config.OPENAI_API_KEY
@@ -57,7 +59,6 @@ class Agent:
 
     # call the API with the prompt from the user and save each reply to a file
     def get_response_for(self, user_text):
-
         # process text and write replies to file
         self.messages.append({"role": "user", "content": user_text})
 
@@ -78,6 +79,14 @@ class Agent:
 
         return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
 
+    # generate a filename to save the output to (just like chatGPT does) and a category chosen from a list
+    def generate_category_and_filename(self, user_first_message):
+        category, filename = ""
 
+        messages = [{"role": "system",
+                     "content": Modes.JARVIS + "Also, assign the message to a category out of these 20: " + list(
+                         categories.Categories) + " and return both the category and the summary in a Python tuple "
+                                                  "of this form: (category, summary)"},
+                    {"role": "user", "content": user_first_message}]
 
-
+        return openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)['choices'][0]['message']['content']
