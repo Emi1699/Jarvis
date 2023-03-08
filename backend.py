@@ -1,77 +1,83 @@
 import openai
 import config
-import modes
+from modes import Modes
 import os
 import datetime
 
-openai.api_key = config.OPENAI_API_KEY
 
-text = True
+class Agent:
 
-'''
-    We need to clarify some things. 
+    def __init__(self):
+        """
+            We need to clarify some things.
 
-    In order for our bot to make sense, it needs to have an idea of the history of our conversations.
-    For that reason, we need to store each reply (both from the user and from the chatbot; for now we will store it
-    in an array, might look into using a database in the future).
+            In order for our bot to make sense, it needs to have an idea of the history of our conversations.
+            For that reason, we need to store each reply (both from the user and from the chatbot; for now we will
+            store it
+            in an array, might look into using a database in the future).
 
-    There are 3 possible roles that an entity can have in a conversation:
-        1. 'system' - this sets the tone of the chatbot and the way it will 'behave' (see below example)
+            There are 3 possible roles that an entity can have in a conversation:
+                1. 'system' - this sets the tone of the chatbot and the way it will 'behave' (see below example)
 
-        2. 'user' - self explanatory
+                2. 'user' - self explanatory
 
-        3. 'assistant' - this is the chatbot itself
-'''
+                3. 'assistant' - this is the chatbot itself
+        """
 
-# this is where we will store the whole conversation between the chatbot and the user
-messages = [
-    {"role": "system", "content": modes.JARVIS}
-]
+        # this is where we will store the whole conversation between the chatbot and the user
+        self.messages = [{"role": "system", "content": Modes.ENCODER}]
 
-'''
-Create output directories and files.
+        # API-key; file in which it resides is not tracked by GIT
+        openai.api_key = config.OPENAI_API_KEY
 
-This CERTAINLY needs improvements, but not now because it's late and I'm tired as fuck.
-'''
-dir_name = "Conversations"  # name of the directory where the saved convo will be
-convo_file_name = str(datetime.datetime.now()).replace(":", "_") + '.txt'  # name of the file where the convo is stored
+        '''
+        Create output directories and files.
 
-# get the path of the directory containing the Python file
-current_working_directory = os.path.dirname(os.path.realpath(__file__))
+        This CERTAINLY needs improvements, but not now because it's late and I'm tired as fuck.
+        '''
+        self.dir_name = "Conversations"  # name of the directory where the saved convo will be
+        self.convo_file_name = str(datetime.datetime.now()).replace(":", "_") + '.txt'  # name of the file where the
+        # convo is stored
 
-# define the path of the new directory
-dir_path = os.path.join(current_working_directory, dir_name)
+        # get the path of the directory containing the Python file
+        self.current_working_directory = os.path.dirname(os.path.realpath(__file__))
 
-# define the path of the convo file inside the above directory
-file_path = os.path.join(dir_path, convo_file_name)
+        # define the path of the new directory
+        self.dir_path = os.path.join(self.current_working_directory, self.dir_name)
 
-if not os.path.exists(dir_path):
-    os.mkdir(dir_path)
+        # define the path of the convo file inside the above directory
+        self.file_path = os.path.join(self.dir_path, self.convo_file_name)
 
-    # clear file before writing to it
-    with open(file_path, 'w', encoding='utf-8') as fl:
-        fl.close()
+        if not os.path.exists(self.dir_path):
+            os.mkdir(self.dir_path)
+
+            # clear file before writing to it
+            with open(self.file_path, 'w', encoding='utf-8') as fl:
+                fl.close()
+
+    # call the API with the prompt from the user and save each reply to a file
+    def get_response_for(self, user_text):
+
+        # process text and write replies to file
+        self.messages.append({"role": "user", "content": user_text})
+
+        # append user's reply to txt file
+        with open(self.file_path, 'a', encoding='utf-8') as fl:
+            fl.write("> user: " + user_text + "\n\n")
+
+        # this is where we call the API
+        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=self.messages)
+
+        # save JARVIS' message in our local list
+        system_message = response['choices'][0]['message']['content']
+        self.messages.append({"role": "assistant", "content": system_message})
+
+        # append JARVIS' reply to txt file
+        with open(self.file_path, 'a', encoding='utf-8') as fl:
+            fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
+
+        return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
 
 
-def get_jarvis_response_for(user_text):
-    global messages
 
-    # process text and write replies to file
-    messages.append({"role": "user", "content": user_text})
 
-    # append user's reply to txt file
-    with open(file_path, 'a', encoding='utf-8') as fl:
-        fl.write("> user: " + user_text + "\n\n")
-
-    # this is where we make call the API
-    response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
-
-    # save JARVIS' message in our local list
-    system_message = response['choices'][0]['message']['content']
-    messages.append({"role": "assistant", "content": system_message})
-
-    # append JARVIS' reply to txt file
-    with open(file_path, 'a', encoding='utf-8') as fl:
-        fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
-
-    return messages[-1]['content']  # return last message in the list, which should be the JARVIS' response

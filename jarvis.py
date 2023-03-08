@@ -1,6 +1,6 @@
 import tkinter as tk
 import modes
-import backend
+from backend import Agent
 import threading
 import os
 
@@ -15,6 +15,8 @@ class Jarvis(tk.Tk):
 
     def __init__(self):
         super().__init__()
+
+        self.agent = Agent()
 
         self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.65)
         self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.75)
@@ -124,7 +126,7 @@ class Jarvis(tk.Tk):
     def generate_response(self, input_text):
         try:
             # generate chatbot response
-            output_text = backend.get_jarvis_response_for(input_text)
+            output_text = self.agent.get_response_for(input_text)
             output_text = "> " + output_text
             self.response_generation_complete = True
 
