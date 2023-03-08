@@ -4,6 +4,7 @@ from enum import Enum
 class Categories(Enum):
     TECHNOLOGY = 'Technology'
     PROGRAMMING = 'Programming'
+    SCIENCE = 'Science'
     FASHION = 'Fashion'
     POLITICS = 'Politics'
     HEALTH_AND_FITNESS = 'Health and Fitness'
