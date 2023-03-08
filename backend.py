@@ -49,7 +49,7 @@ if not os.path.exists(dir_path):
     os.mkdir(dir_path)
 
     # clear file before writing to it
-    with open(file_path, 'w') as fl:
+    with open(file_path, 'w', encoding='utf-8') as fl:
         fl.close()
 
 
@@ -60,7 +60,7 @@ def get_jarvis_response_for(user_text):
     messages.append({"role": "user", "content": user_text})
 
     # append user's reply to txt file
-    with open(file_path, 'a') as fl:
+    with open(file_path, 'a', encoding='utf-8') as fl:
         fl.write("> user: " + user_text + "\n\n")
 
     # this is where we make call the API
@@ -71,7 +71,7 @@ def get_jarvis_response_for(user_text):
     messages.append({"role": "assistant", "content": system_message})
 
     # append JARVIS' reply to txt file
-    with open(file_path, 'a') as fl:
+    with open(file_path, 'a', encoding='utf-8') as fl:
         fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
 
     return messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
