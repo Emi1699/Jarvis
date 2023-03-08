@@ -142,35 +142,6 @@ class Jarvis(tk.Tk):
             print(e)
 
 
-# def write_conversation_to_file(lst):
-#     # get the path of the directory containing the Python file
-#     file_path = os.path.dirname(os.path.realpath(__file__))
-#
-#     # define the name of the directory to be created
-#     dir_name = "Conversations"
-#     convo_file_name = 'last_convo.txt'
-#
-#     # define the path of the new directory
-#     dir_path = os.path.join(file_path, dir_name)
-#
-#     if not os.path.exists(dir_path):
-#         os.mkdir(dir_path)
-#
-#     user = True
-#
-#     with open(os.path.join(dir_path, convo_file_name), 'w') as fl:
-#         for el in lst:
-#             if el['role'] == 'system': continue #ignore system message
-#
-#             if user:
-#                 fl.write('> user: ' + el['content'] + "\n")
-#             else:
-#                 fl.write('> jarvis: ' + el['content'] + "\n")
-#
-#             user = not user
-
-
 if __name__ == "__main__":
     jarvis = Jarvis()
     jarvis.run()
-    # write_conversation_to_file(openai_api.messages)
