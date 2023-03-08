@@ -53,4 +53,4 @@ class Modes:
 
     ENCODER = "Summarize the following message USING A MAXIMUM OF 5 WORDS. The purpose of this summarization is to " \
               "use it as the name of a file in which the conversation will be saved. It is preferred that you use words " \
-              "from the message itself in the summarization, if possible. "
+              "from the message itself in the summarization, if possible. YOU MUST ALWAYS RESPECT THIS RULE!"
