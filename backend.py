@@ -14,7 +14,6 @@ def generate_category_and_filename(user_first_message):
                 {"role": "user", "content": user_first_message}]
 
     msg = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)['choices'][0]['message']['content']
-    print(msg)
 
     category = msg[:msg.index(",")]
     summary = msg[msg.index(",") + 1:]
@@ -79,8 +78,7 @@ class Agent:
             if not os.path.exists(os.path.join(self.conversations_directory, self.output_category_dir)):
                 os.mkdir(os.path.join(self.conversations_directory, self.output_category_dir))
 
-            self.final_output_file = os.path.join(os.path.join(self.conversations_directory, self.output_category_dir),
-                                                  self.output_summary_file)
+            self.final_output_file = os.path.join(os.path.join(self.conversations_directory, self.output_category_dir), self.output_summary_file)
 
             self.first_message = False
 
