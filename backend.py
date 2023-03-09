@@ -77,10 +77,7 @@ class Agent:
             # remove whitespaces and dots at the end
             if self.output_summary[-1] == ".": self.output_summary = self.output_summary[:-1]
             self.output_summary = self.output_summary.strip() + ".txt"
-
-            # # check if output category directory exists; if not, create it
-            # if not os.path.exists(os.path.join(self.conversations_directory, self.output_category_dir)):
-            #     os.mkdir(os.path.join(self.conversations_directory, self.output_category_dir))
+            self.output_summary = self.output_summary.replace(" ", "_")
 
             self.final_output_file = os.path.join(self.conversations_directory, self.output_category + "_" + self.output_summary)
 
