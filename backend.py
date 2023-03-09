@@ -57,10 +57,10 @@ class Agent:
             os.mkdir(self.conversations_directory)
 
         # both of the following variables will be set after the user's first message
-        self.output_summary_file = ""  # define the path of the convo file inside the above directory
-        self.output_category_dir = ""  # name of the directory where the saved convo will be
+        self.output_summary = ""  # define the path of the convo file inside the above directory
+        self.output_category = ""  # name of the directory where the saved convo will be
 
-        # final output file after combining the category dir with the summary file
+        # final output file after combining the category with the summary
         self.final_output_file = ""
 
         self.first_message = True  # used to set the name of the output file after the user's first message
@@ -72,13 +72,17 @@ class Agent:
 
         # if this was the user's first message in a conversation, create the conversation's output file
         if self.first_message:
-            self.output_category_dir, self.output_summary_file = generate_category_and_filename(user_text)
+            self.output_category, self.output_summary = generate_category_and_filename(user_text)
 
-            # check if output category directory exists; if not, create it
-            if not os.path.exists(os.path.join(self.conversations_directory, self.output_category_dir)):
-                os.mkdir(os.path.join(self.conversations_directory, self.output_category_dir))
+            # remove whitespaces and dots at the end
+            if self.output_summary[-1] == ".": self.output_summary = self.output_summary[:-1]
+            self.output_summary = self.output_summary.strip() + ".txt"
 
-            self.final_output_file = os.path.join(os.path.join(self.conversations_directory, self.output_category_dir), self.output_summary_file)
+            # # check if output category directory exists; if not, create it
+            # if not os.path.exists(os.path.join(self.conversations_directory, self.output_category_dir)):
+            #     os.mkdir(os.path.join(self.conversations_directory, self.output_category_dir))
+
+            self.final_output_file = os.path.join(self.conversations_directory, self.output_category + "_" + self.output_summary)
 
             self.first_message = False
 
