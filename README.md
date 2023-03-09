@@ -14,7 +14,7 @@ Lots of improvements need to be done still, especially on the GUI side.
 - `jarvis.py`: GUI.
 - `backend`: Consume the OpenAI API and manage the conversation files.
 - `modes.py`: This sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well. Make sure to go to line 43 inside the 'backend.py' and change that line to whatever mode you want to use.
-- `modes.py`: Most common interest categories found online. You can add your own there, and JARVIS will automatically use them if he finds a conversation that matches that specific category.
+- `categories.py`: Most common interest categories found online. You can add your own there, and JARVIS will automatically use them if he finds a conversation that matches that specific category.
 
 
 ## Conversation Logs
