@@ -12,8 +12,16 @@ Lots of improvements need to be done still, especially on the GUI side.
 
 - `config.py`: Here is where you'll keep your API_KEY (see step 2-4 below).
 - `jarvis.py`: GUI.
-- `openai_api`: Consume the OpenAI API.
-- `modes.py`: This sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well; make sure to go to line 26 in `openai_api.py` and use whatever mode you want for your app. (Read the official docs to get a better idea).
+- `backend`: Consume the OpenAI API and manage the conversation files.
+- `modes.py`: This sets the tone for how the chatbot responds and 'behaves' for the rest of the conversation. You can add your own modes as well. Make sure to go to line 43 inside the 'backend.py' and change that line to whatever mode you want to use.
+- `modes.py`: Most common interest categories found online. You can add your own there, and JARVIS will automatically use them if he finds a conversation that matches that specific category.
+
+
+## Conversation Logs
+
+J.A.R.V.I.S. will automatically save your conversation logs into folders based on the topic being discussed. This feature will make it easier for you to locate and review your previous conversations on specific subjects. By default, J.A.R.V.I.S. will store the logs in the 'Conversations/<TOPIC>' folders, where <TOPIC> is decided based on the user's first message.
+
+For any topic, each conversation is saved in its separate file. A conversation starts when you fire up JARVIS and ends when you close it. Lots of improvements to be done here, I know.
 
 ## Usage
 
@@ -28,7 +36,7 @@ Also, you might need to scroll to view JARVIS's full response (just a reminder t
 
 ## System Requirements
 
-This will almost certainly work on any UNIX-like system that supports the OpenAI library.
+I've tested it on Windows an MacOS and it works on both.
 
 I have not tested it on Windows; do so at your own peril. Also, the instructions below assume you are on a UNIX-based machine.
 
