@@ -18,11 +18,11 @@ class Jarvis(tk.Tk):
 
         self.agent = Agent()
 
-        self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.65)
-        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.75)
-        self.BOX_RELATIVE_WIDTH = 0.05 * self.WINDOW_WIDTH
+        self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.68)
+        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.78)
+        self.BOX_RELATIVE_WIDTH = 0.065 * self.WINDOW_WIDTH
         self.INPUT_BOX_RELATIVE_HEIGHT = 0.0075 * self.WINDOW_HEIGHT
-        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.021 * self.WINDOW_HEIGHT
+        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.0175 * self.WINDOW_HEIGHT
 
         # text widgets, labels, and buttons
         self.input_box = tk.Text(self, height=int(self.INPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
