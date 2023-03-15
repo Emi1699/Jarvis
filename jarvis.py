@@ -45,7 +45,9 @@ class Jarvis(tk.Tk):
                                   highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                   insertbackground=self.TEXT_COLOUR)
 
-        self.input_label = tk.Label(self, text="> What would you like to know?", font=('Source code pro', 20))
+        self.input_label = tk.Label(self, text="> What would you like to know? (press <ENTER> to generate response)", font=('Source code '
+                                                                                                                          'pro',
+                                                                                                                      20))
         self.input_label.configure(bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR)
 
         self.output_label = tk.Label(self, text="> Answer", font=('Source code pro', 20))
@@ -53,12 +55,14 @@ class Jarvis(tk.Tk):
 
         self.process_button = tk.Button(self, text="> generate <", command=self.process_input)
 
+        self.new_conversation_button = tk.Button(self, text="> new conversation <", command=self.new_conversation)
+
         self.response_generation_complete = True
 
-    def configure_main_window(self):
-        # Bind the FocusIn and FocusOut events of input_box to on_entry_click and on_focus_out methods
-        self.input_box.bind('<FocusIn>', self.on_entry_click)
-        self.input_box.bind('<FocusOut>', self.on_focus_out)
+    # def configure_main_window(self):
+    #     # Bind the FocusIn and FocusOut events of input_box to on_entry_click and on_focus_out methods
+    #     self.input_box.bind('<FocusIn>', self.on_entry_click)
+    #     self.input_box.bind('<FocusOut>', self.on_focus_out)
 
     def configure_main_window(self):
         self.configure(bg='black')  # background color
@@ -74,7 +78,9 @@ class Jarvis(tk.Tk):
         self.output_label.pack()
         self.output_box.pack()
 
-        self.process_button.pack()
+        self.new_conversation_button.pack()
+        # self.process_button.pack(side='bottom', fill='x') # dont display generate button
+
 
     def run(self):
         self.configure_main_window()
@@ -94,6 +100,7 @@ class Jarvis(tk.Tk):
         if self.response_generation_complete and self.process_button.cget('state') == 'normal':
             self.response_generation_complete = False
             self.process_button.config(state=tk.DISABLED)
+            self.new_conversation_button.config(state=tk.DISABLED)
 
             input_text = self.input_box.get("1.0", "end-1c")  # Get the text from the input box
             # self.input_box.delete('1.0', tk.END)  # clear input box
@@ -135,11 +142,17 @@ class Jarvis(tk.Tk):
             self.output_box.delete("1.0", tk.END)  # Clear the output box
             self.display_text(output_text)
 
-            # Enable the "generate" button once the display_text method is done
+            # Enable the "generate" and "new_conversation" buttons once the display_text method is done
             self.after(len(output_text) * 10, self.process_button.config, {'state': tk.NORMAL})
+            self.after(len(output_text) * 10, self.new_conversation_button.config, {'state': tk.NORMAL})
 
         except Exception as e:
             print(e)
+
+    def new_conversation(self):
+        self.agent.first_message = True
+        self.input_box.delete("1.0", tk.END)
+        self.output_box.delete("1.0", tk.END)
 
 
 if __name__ == "__main__":
