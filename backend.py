@@ -40,7 +40,7 @@ class Agent:
         """
 
         # this is where we will store the whole conversation between the chatbot and the user
-        self.messages = [{"role": "system", "content": Modes.JARVIS_OPENAI.value}]
+        self.messages = [{"role": "system", "content": Modes.JARVIS_COMPANION.value}]
         # API-key; file in which it resides is not tracked by GIT
         openai.api_key = config.OPENAI_API_KEY
 
