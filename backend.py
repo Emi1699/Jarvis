@@ -98,6 +98,7 @@ class Agent:
         with open(self.final_output_file, 'a', encoding='utf-8') as fl:
             fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
 
+
         return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
 
     # generate a filename to save the output to (just like chatGPT does) and a category chosen from a list
