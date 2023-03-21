@@ -47,7 +47,7 @@ class Jarvis(tk.Tk):
                                   highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                   insertbackground=self.TEXT_COLOUR)
 
-        self.input_label = tk.Label(self, text="> What would you like to know? (press <ENTER> to generate response)", font=('Source code '
+        self.input_label = tk.Label(self, text="> Question", font=('Source code '
                                                                                                                           'pro',
                                                                                                                       20))
         self.input_label.configure(bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR)
