@@ -19,9 +19,11 @@ This project is also found inside my #machine-learning repository; I started dev
 
 ## Conversation Logs
 
-J.A.R.V.I.S. will automatically save your conversation logs into folders based on the topic being discussed. This feature will make it easier for you to locate and review your previous conversations on specific subjects. By default, J.A.R.V.I.S. will store the logs in the 'Conversations/<TOPIC>' folders, where <TOPIC> is decided based on the user's first message.
+J.A.R.V.I.S. will automatically save your conversation logs into folders based on the topic being discussed. This feature will make it easier for you to locate and review your previous conversations on specific subjects. By default, J.A.R.V.I.S. will store the logs in the 'Conversations/<TOPIC_SUMMARY>' folder, where <TOPIC_SUMMARY> is decided based on the user's first message in a new conversation.
 
-For any topic, each conversation is saved in its separate file. A conversation starts when you fire up JARVIS and ends when you close it. Lots of improvements to be done here, I know.
+The topic are chosen from a list of 20 most common topics that people are searching for online, which are found inside the `categories.py` file.
+
+When you press the 'new conversation' button at the bottom of the window, JARVIS will generate a new 'TOPIC_SUMMARY' file inside the 'Conversations' folder after you input the first message inside that new conversation.
 
 ## Usage
 
