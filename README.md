@@ -6,7 +6,7 @@ Inspired by Iron-Man's sophisticated assistant.
 
 This project is also found inside my #machine-learning repository; I started developing it there as a side-project to get some experience with OpenAI's new API, but it grew into something that I use every single day.
 
-Lots of improvements need to be done still, especially on the GUI side.
+![jarvis](https://user-images.githubusercontent.com/20230738/226624271-230f7231-7d91-413b-99f6-8403927bf745.PNG)
 
 ## About the files
 
@@ -19,16 +19,18 @@ Lots of improvements need to be done still, especially on the GUI side.
 
 ## Conversation Logs
 
-J.A.R.V.I.S. will automatically save your conversation logs into folders based on the topic being discussed. This feature will make it easier for you to locate and review your previous conversations on specific subjects. By default, J.A.R.V.I.S. will store the logs in the 'Conversations/<TOPIC>' folders, where <TOPIC> is decided based on the user's first message.
+J.A.R.V.I.S. will automatically save your conversation logs into folders based on the topic being discussed. This feature will make it easier for you to locate and review your previous conversations on specific subjects. By default, J.A.R.V.I.S. will store the logs in the 'Conversations/<TOPIC_SUMMARY>' folder, where <TOPIC_SUMMARY> is decided based on the user's first message in a new conversation.
 
-For any topic, each conversation is saved in its separate file. A conversation starts when you fire up JARVIS and ends when you close it. Lots of improvements to be done here, I know.
+The topic are chosen from a list of 20 most common topics that people are searching for online, which are found inside the `categories.py` file.
+
+When you press the 'new conversation' button at the bottom of the window, JARVIS will generate a new 'TOPIC_SUMMARY' file inside the 'Conversations' folder after you input the first message inside that new conversation.
 
 ## Usage
 
 Nothing much to see here, but just wanted to remind people that they can press:
 
-- `<return>` -> Generate response from JARVIS
-- `<return> + <shift>` -> add new line to the input box
+- `<return> / <enter>` -> Generate response from JARVIS
+- `<return> / <enter> + <shift>` -> add new line to the input box
 
 So it is just like any other input field out there.
 
@@ -40,7 +42,7 @@ I've tested it on Windows an MacOS and it works on both.
 
 I have not tested it on Windows; do so at your own peril. Also, the instructions below assume you are on a UNIX-based machine.
 
-I am using Python 3.9.
+I am using Python >= 3.7 (i have developed the app on 2 different machines, with different Python version and it works on both).
 
 ## How to Run
 
