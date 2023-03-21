@@ -7,25 +7,7 @@ from colorama import Fore, Style
 
 
 def get_user_input():
-    user_input = ''
-
-    while True:
-        # get user input
-        text = input("> ME: ")
-
-        # check if only return key was used
-        if text == '\r':
-            # exit loop when user has finished input
-            if user_input.endswith('\n'):
-                break
-        # check if shift+return was used
-        elif '\r' in text:
-            # split the input text and append each line to user_input
-            lines = text.split('\r')
-            for line in lines:
-                user_input += line + '\n'
-        else:
-            user_input += text
+    user_input = input("> ME: ")
 
     return user_input
 
