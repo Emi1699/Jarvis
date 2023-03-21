@@ -1,4 +1,5 @@
-config.py
+src/config.py
 /.idea
 /__pycache__
-/Conversations
+/src/__pycache__
+/src/Conversations
