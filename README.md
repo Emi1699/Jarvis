@@ -29,8 +29,8 @@ When you press the 'new conversation' button at the bottom of the window, JARVIS
 
 Nothing much to see here, but just wanted to remind people that they can press:
 
-- `<return>` -> Generate response from JARVIS
-- `<return> + <shift>` -> add new line to the input box
+- `<return> / <enter>` -> Generate response from JARVIS
+- `<return> / <enter> + <shift>` -> add new line to the input box
 
 So it is just like any other input field out there.
 
@@ -42,7 +42,7 @@ I've tested it on Windows an MacOS and it works on both.
 
 I have not tested it on Windows; do so at your own peril. Also, the instructions below assume you are on a UNIX-based machine.
 
-I am using Python 3.9.
+I am using Python >= 3.7 (i have developed the app on 2 different machines, with different Python version and it works on both).
 
 ## How to Run
 
