@@ -10,8 +10,10 @@ class Jarvis(tk.Tk):
     PADDING = 17
     BOX_COLOUR = 'black'
     TEXT_COLOUR = 'white'
-    UNSELECTED_BOX_OUTLINE_COLOUR = '#660080'
-    SELECTED_BOX_OUTLINE_COLOUR = '#660080'
+    INPUT_TEXT_COLOUR = '#FF8C00'
+    OUTPUT_TEXT_COLOUR = '#00CED1'
+    UNSELECTED_BOX_OUTLINE_COLOUR = '#111111'
+    SELECTED_BOX_OUTLINE_COLOUR = '#111111'
 
     def __init__(self):
         super().__init__()
@@ -20,15 +22,15 @@ class Jarvis(tk.Tk):
 
         self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.68)
         self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.78)
-        self.BOX_RELATIVE_WIDTH = 0.065 * self.WINDOW_WIDTH
-        self.INPUT_BOX_RELATIVE_HEIGHT = 0.0075 * self.WINDOW_HEIGHT
-        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.0175 * self.WINDOW_HEIGHT
+        self.BOX_RELATIVE_WIDTH = 0.063 * self.WINDOW_WIDTH
+        self.INPUT_BOX_RELATIVE_HEIGHT = 0.0074 * self.WINDOW_HEIGHT
+        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.0174 * self.WINDOW_HEIGHT
 
         # text widgets, labels, and buttons
         self.input_box = tk.Text(self, height=int(self.INPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                  wrap=tk.WORD,
                                  font=('Source code pro', 20))
-        self.input_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg='gray',
+        self.input_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg=self.INPUT_TEXT_COLOUR,
                                  highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                  highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                  insertbackground=self.TEXT_COLOUR)
@@ -40,7 +42,7 @@ class Jarvis(tk.Tk):
 
         self.output_box = tk.Text(self, height=int(self.OUTPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
                                   wrap=tk.WORD, font=('Source code pro', 20))
-        self.output_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR,
+        self.output_box.configure(padx=self.PADDING, pady=self.PADDING, bg=self.BOX_COLOUR, fg=self.OUTPUT_TEXT_COLOUR,
                                   highlightbackground=self.UNSELECTED_BOX_OUTLINE_COLOUR,
                                   highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                   insertbackground=self.TEXT_COLOUR)
