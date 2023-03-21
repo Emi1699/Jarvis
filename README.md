@@ -40,8 +40,6 @@ Also, you might need to scroll to view JARVIS's full response (just a reminder t
 
 I've tested it on Windows an MacOS and it works on both.
 
-I have not tested it on Windows; do so at your own peril. Also, the instructions below assume you are on a UNIX-based machine.
-
 I am using Python >= 3.7 (i have developed the app on 2 different machines, with different Python versions and it works on both).
 
 ## How to Run
