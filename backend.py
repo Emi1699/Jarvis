@@ -10,10 +10,11 @@ openai.api_key = config.OPENAI_API_KEY
 
 
 def generate_category_and_filename(user_first_message):
-    messages = [{"role": "system", "content": Modes.JARVIS.value},
+    messages = [{"role": "system", "content": Modes.ENCODER.value},
                 {"role": "user", "content": user_first_message}]
 
     msg = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)['choices'][0]['message']['content']
+    print(msg)
 
     category = msg[:msg.index(",")]
     summary = msg[msg.index(",") + 1:]
@@ -69,11 +70,9 @@ class Agent:
     def get_response_for(self, user_text):
         # process text and write replies to file
         self.messages.append({"role": "user", "content": user_text})
-        print("app user")
 
         # if this was the user's first message in a conversation, create the conversation's output file
         if self.first_message:
-            print("first")
             self.output_category, self.output_summary = generate_category_and_filename(user_text)
 
             # remove whitespaces and dots at the end
@@ -88,7 +87,6 @@ class Agent:
         # append user's reply to txt file
         with open(self.final_output_file, 'a', encoding='utf-8') as fl:
             fl.write("> user: " + user_text + "\n\n")
-            print("write user")
 
         # this is where we call the API
         response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=self.messages)
@@ -96,12 +94,10 @@ class Agent:
         # save JARVIS' message in our local list
         system_message = response['choices'][0]['message']['content']
         self.messages.append({"role": "assistant", "content": system_message})
-        print("app jarvis")
 
         # append JARVIS' reply to txt file
         with open(self.final_output_file, 'a', encoding='utf-8') as fl:
             fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
-            print("write jarvis")
 
 
         return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
