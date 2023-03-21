@@ -4,7 +4,6 @@ from backend import Agent
 import threading
 import os
 
-
 class Jarvis(tk.Tk):
     # constants used throughout the program
     PADDING = 17

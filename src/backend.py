@@ -1,6 +1,5 @@
 import openai
 
-import categories
 import config
 from modes import Modes
 import os
