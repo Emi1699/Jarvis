@@ -72,6 +72,8 @@ Replace `'your-api-key'` with your API key from step 2.
 
 ### 5. Run the Program
 
+Run the program from inside the `src` directory using the following command:
+
 ```
 $ python jarvis.py
 ```
