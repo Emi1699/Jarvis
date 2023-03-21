@@ -42,7 +42,7 @@ I've tested it on Windows an MacOS and it works on both.
 
 I have not tested it on Windows; do so at your own peril. Also, the instructions below assume you are on a UNIX-based machine.
 
-I am using Python >= 3.7 (i have developed the app on 2 different machines, with different Python version and it works on both).
+I am using Python >= 3.7 (i have developed the app on 2 different machines, with different Python versions and it works on both).
 
 ## How to Run
 
@@ -71,6 +71,8 @@ Add this line inside the `config.py` file: `OPENAI_API_KEY = "your-api-key"`.
 Replace `'your-api-key'` with your API key from step 2.
 
 ### 5. Run the Program
+
+Run the program from inside the `src` directory using the following command:
 
 ```
 $ python jarvis.py
