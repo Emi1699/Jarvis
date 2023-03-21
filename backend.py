@@ -14,7 +14,6 @@ def generate_category_and_filename(user_first_message):
                 {"role": "user", "content": user_first_message}]
 
     msg = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)['choices'][0]['message']['content']
-    print(msg)
 
     category = msg[:msg.index(",")]
     summary = msg[msg.index(",") + 1:]
