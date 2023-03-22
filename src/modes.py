@@ -127,7 +127,7 @@ class Modes(Enum):
                                                                                   "a summary, the default is the first three words in  " \
                                                                                   "the  user's first message to you message.  If the " \
                                                                                   "user's first message to you contains less than 3 " \
-                                                                                  "words, the default <summary> is 'other'." \
+                                                                                  "words, the default summary is 'other'." \
                                                                                   "Return the answer " \
                                                                                   "in the following format: '<category>," \
                                                                                   "<summary>'. For the summary, use '_' instead of " \
