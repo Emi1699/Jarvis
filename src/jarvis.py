@@ -11,8 +11,8 @@ class Jarvis(tk.Tk):
     TEXT_COLOUR = 'white'
     INPUT_TEXT_COLOUR = '#FF8C00'
     OUTPUT_TEXT_COLOUR = '#00CED1'
-    UNSELECTED_BOX_OUTLINE_COLOUR = '#111111'
-    SELECTED_BOX_OUTLINE_COLOUR = '#111111'
+    UNSELECTED_BOX_OUTLINE_COLOUR = '#9417cf'
+    SELECTED_BOX_OUTLINE_COLOUR = '#9417cf'
 
     def __init__(self):
         super().__init__()
@@ -20,10 +20,10 @@ class Jarvis(tk.Tk):
         self.agent = Agent()
 
         self.WINDOW_WIDTH = int(self.winfo_screenwidth() * 0.68)
-        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.78)
+        self.WINDOW_HEIGHT = int(self.winfo_screenheight() * 0.7)
         self.BOX_RELATIVE_WIDTH = 0.063 * self.WINDOW_WIDTH
-        self.INPUT_BOX_RELATIVE_HEIGHT = 0.0074 * self.WINDOW_HEIGHT
-        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.0174 * self.WINDOW_HEIGHT
+        self.INPUT_BOX_RELATIVE_HEIGHT = 0.01 * self.WINDOW_HEIGHT
+        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.02 * self.WINDOW_HEIGHT
 
         # text widgets, labels, and buttons
         self.input_box = tk.Text(self, height=int(self.INPUT_BOX_RELATIVE_HEIGHT), width=int(self.BOX_RELATIVE_WIDTH),
@@ -46,12 +46,10 @@ class Jarvis(tk.Tk):
                                   highlightcolor=self.SELECTED_BOX_OUTLINE_COLOUR,
                                   insertbackground=self.TEXT_COLOUR)
 
-        self.input_label = tk.Label(self, text="> Question", font=('Source code '
-                                                                                                                          'pro',
-                                                                                                                      20))
+        self.input_label = tk.Label(self, text="> question <", font=('Source code pro', 20))
         self.input_label.configure(bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR)
 
-        self.output_label = tk.Label(self, text="> Answer", font=('Source code pro', 20))
+        self.output_label = tk.Label(self, text="> answer <", font=('Source code pro', 20))
         self.output_label.configure(bg=self.BOX_COLOUR, fg=self.TEXT_COLOUR)
 
         self.process_button = tk.Button(self, text="> generate <", command=self.process_input)
@@ -59,11 +57,6 @@ class Jarvis(tk.Tk):
         self.new_conversation_button = tk.Button(self, text="> new conversation <", command=self.new_conversation)
 
         self.response_generation_complete = True
-
-    # def configure_main_window(self):
-    #     # Bind the FocusIn and FocusOut events of input_box to on_entry_click and on_focus_out methods
-    #     self.input_box.bind('<FocusIn>', self.on_entry_click)
-    #     self.input_box.bind('<FocusOut>', self.on_focus_out)
 
     def configure_main_window(self):
         self.configure(bg='black')  # background color
@@ -75,13 +68,13 @@ class Jarvis(tk.Tk):
         # pack widgets inside parent widget (main_window)
         self.input_label.pack()
         self.input_box.pack()
+        self.input_box.insert("1.0", "> ")
 
         self.output_label.pack()
         self.output_box.pack()
 
         self.new_conversation_button.pack()
         # self.process_button.pack(side='bottom', fill='x') # dont display generate button
-
 
     def run(self):
         self.configure_main_window()
@@ -154,6 +147,8 @@ class Jarvis(tk.Tk):
         self.agent.first_message = True
         self.input_box.delete("1.0", tk.END)
         self.output_box.delete("1.0", tk.END)
+
+        self.input_box.insert("1.0", "> ")
 
 
 if __name__ == "__main__":
