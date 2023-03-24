@@ -7,6 +7,9 @@ import os
 # API-key; file in which it resides is not tracked by GIT
 openai.api_key = config.OPENAI_API_KEY
 
+#use save to file method or not
+save_to_file = True
+
 
 def generate_category_and_filename(user_first_message):
     messages = [{"role": "system", "content": Modes.ENCODER.value},
@@ -39,7 +42,7 @@ class Agent:
         """
 
         # this is where we will store the whole conversation between the chatbot and the user
-        self.messages = [{"role": "system", "content": Modes.JARVIS_COMPANION.value}]
+        self.messages = [{"role": "system", "content": Modes.JARVIS_OPENAI.value}]
         # API-key; file in which it resides is not tracked by GIT
         openai.api_key = config.OPENAI_API_KEY
 
@@ -66,37 +69,37 @@ class Agent:
 
     # call the API with the prompt from the user and save each reply to a file
     def get_response_for(self, user_text):
-        # process text and write replies to file
+
+        # append user's message to our list of messages (i.e. the whole conversation)
         self.messages.append({"role": "user", "content": user_text})
 
-        # if this was the user's first message in a conversation, create the conversation's output file
-        if self.first_message:
-            self.output_category, self.output_summary = generate_category_and_filename(user_text)
-
-            # remove whitespaces and dots at the end
-            if self.output_summary[-1] == ".": self.output_summary = self.output_summary[:-1]
-            self.output_summary = self.output_summary.strip() + ".txt"
-            self.output_summary = self.output_summary.replace(" ", "_")
-
-            self.final_output_file = os.path.join(self.conversations_directory, self.output_category + "_" + self.output_summary)
-
-            self.first_message = False
-
-        # append user's reply to txt file
-        with open(self.final_output_file, 'a', encoding='utf-8') as fl:
-            fl.write("> user: " + user_text + "\n\n")
-
         # this is where we call the API
-        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=self.messages)
+        system_message = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=self.messages)['choices'][0]['message']['content']
 
         # save JARVIS' message in our local list
-        system_message = response['choices'][0]['message']['content']
         self.messages.append({"role": "assistant", "content": system_message})
 
-        # append JARVIS' reply to txt file
-        with open(self.final_output_file, 'a', encoding='utf-8') as fl:
-            fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
+        if save_to_file:
+            # if this was the user's first message in a conversation, create the conversation's output file
+            if self.first_message:
+                self.output_category, self.output_summary = generate_category_and_filename(user_text)
 
+                # remove whitespaces and dots at the end
+                if self.output_summary[-1] == ".": self.output_summary = self.output_summary[:-1]
+                self.output_summary = self.output_summary.strip() + ".txt"
+                self.output_summary = self.output_summary.replace(" ", "_")
+
+                self.final_output_file = os.path.join(self.conversations_directory, self.output_category + "_" + self.output_summary)
+
+                self.first_message = False
+
+            # append user's reply to txt file
+            with open(self.final_output_file, 'a', encoding='utf-8') as fl:
+                fl.write("> user: " + user_text + "\n\n")
+
+            # append JARVIS' reply to txt file
+            with open(self.final_output_file, 'a', encoding='utf-8') as fl:
+                fl.write("> J.A.R.V.I.S: " + system_message + "\n\n")
 
         return self.messages[-1]['content']  # return last message in the list, which should be the JARVIS' response
 
