@@ -27,8 +27,8 @@ When you press the 'new conversation' button at the bottom of the window, JARVIS
 
 Nothing much to see here, but just wanted to remind people that they can press:
 
-- `<return> / <enter>` -> Generate response from JARVIS
-- `<return> / <enter> + <shift>` -> add new line to the input box
+- `<return>` -> Generate response from JARVIS
+- `<return> + <shift>` -> add new line to the input box
 
 So it is just like any other input field out there.
 
