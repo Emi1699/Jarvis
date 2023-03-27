@@ -1,8 +1,6 @@
 import sys
 import tkinter as tk
 
-# sys.path.append('..')
-# import src.modes
 from backend.backend import Agent
 import threading
 from frontend.style import Style

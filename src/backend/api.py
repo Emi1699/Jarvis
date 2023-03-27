@@ -1,13 +1,13 @@
 import openai
 
-import system.config as config
-from system.modes import Modes
+import config
+from modes import Modes
 import os
 
 # API-key; file in which it resides is not tracked by GIT
 openai.api_key = config.OPENAI_API_KEY
 
-# use save to file method or not
+#use save to file method or not
 save_to_file = True
 
 
