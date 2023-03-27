@@ -121,13 +121,11 @@ class Modes(Enum):
                 "only provide factual information backed by all the related fields: neuroscience, psychology, etc."
 
     # used to automatically generate output folders and file names to save conversation history
-    ENCODER = "Summarize the user's first message to you using between 3 to 5 words. Make it as concise as possible. Assign it a category from the " \
+    ENCODER = "Summarize the user's first message to you using exactly 5 words. Make it as concise as possible. Assign it a category from the " \
               "following:" + str([x.name for x in list(categories.Categories)]) + ". Only use categories in that list. If you can't find " \
                                                                                   "a category, the default is 'OTHER'. If you can't find " \
                                                                                   "a summary, the default is the first three words in  " \
-                                                                                  "the  user's first message to you message.  If the " \
-                                                                                  "user's first message to you contains less than 3 " \
-                                                                                  "words, the default summary is 'other'." \
+                                                                                  "the  user's first message to you. " \
                                                                                   "Return the answer " \
                                                                                   "in the following format: '<category>," \
                                                                                   "<summary>'. For the summary, use '_' instead of " \
