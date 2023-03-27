@@ -1,7 +1,7 @@
 import openai
 
-import config
-from modes import Modes
+import system.config as config
+from system.modes import Modes
 import os
 
 # API-key; file in which it resides is not tracked by GIT

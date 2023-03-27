@@ -6,3 +6,4 @@ src/system/config.py
 /src/system/__pycache__
 /src/frontend/__pycache__
 /src/backend/__pycache__
+/src/frontend/__pycache__/app.cpython-39.pyc

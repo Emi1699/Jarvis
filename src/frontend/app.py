@@ -1,7 +1,7 @@
 import sys
 import tkinter as tk
 
-from backend.backend import Agent
+from backend.api import Agent
 import threading
 from frontend.style import Style
 import os
