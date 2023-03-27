@@ -4,3 +4,5 @@ src/system/config.py
 /src/__pycache__
 /src/Conversations
 /src/system/__pycache__
+/src/frontend/__pycache__
+/src/backend/__pycache__
