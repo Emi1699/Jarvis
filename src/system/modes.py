@@ -12,7 +12,7 @@ vice-versa; I am still working on this.
 
 from enum import Enum
 
-import categories
+from system import categories
 
 
 class Modes(Enum):

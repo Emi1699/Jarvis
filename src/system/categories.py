@@ -1,6 +1,4 @@
 from enum import Enum
-
-
 class Categories(Enum):
     TECHNOLOGY = 'Technology'
     PROGRAMMING = 'Programming'
