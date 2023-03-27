@@ -7,7 +7,12 @@ import os
 # API-key; file in which it resides is not tracked by GIT
 openai.api_key = config.OPENAI_API_KEY
 
-#use save to file method or not
+try:
+    mode = config.MODE
+except AttributeError:
+    mode = Modes.JARVIS.value
+
+# use save to file method or not
 save_to_file = True
 
 
@@ -40,9 +45,13 @@ class Agent:
 
                 3. 'assistant' - this is the chatbot itself
         """
+        try:
+            self.mode = mode
+        except AttributeError:  # by default, we're always using Jarvis
+            self.mode = Modes.JARVIS.value
 
         # this is where we will store the whole conversation between the chatbot and the user
-        self.messages = [{"role": "system", "content": Modes.JARVIS_OPENAI.value}]
+        self.messages = [{"role": "system", "content": self.mode}]
         # API-key; file in which it resides is not tracked by GIT
         openai.api_key = config.OPENAI_API_KEY
 
