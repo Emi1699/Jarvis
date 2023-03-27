@@ -2,11 +2,11 @@ class Style:
 
     def __init__(self):
 
-        self.WINDOW_WIDTH = int(1000 * 0.68)
-        self.WINDOW_HEIGHT = int(1000 * 0.7)
+        self.WINDOW_WIDTH = int(1500 * 0.68)
+        self.WINDOW_HEIGHT = int(1250 * 0.7)
         self.BOX_RELATIVE_WIDTH = 0.063 * self.WINDOW_WIDTH
         self.INPUT_BOX_RELATIVE_HEIGHT = 0.01 * self.WINDOW_HEIGHT
-        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.02 * self.WINDOW_HEIGHT
+        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.015 * self.WINDOW_HEIGHT
 
         # constants used throughout the program
         self.PADDING = 17
