@@ -1,12 +1,21 @@
+import platform
+
 class Style:
 
     def __init__(self):
+
+        self.user_os = platform.platform()
 
         self.WINDOW_WIDTH = int(1500 * 0.68)
         self.WINDOW_HEIGHT = int(1250 * 0.7)
         self.BOX_RELATIVE_WIDTH = 0.063 * self.WINDOW_WIDTH
         self.INPUT_BOX_RELATIVE_HEIGHT = 0.01 * self.WINDOW_HEIGHT
-        self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.015 * self.WINDOW_HEIGHT
+
+        if 'mac' in self.user_os:
+            self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.022 * self.WINDOW_HEIGHT
+        else:
+            self.OUTPUT_BOX_RELATIVE_HEIGHT = 0.015 * self.WINDOW_HEIGHT
+
 
         # constants used throughout the program
         self.PADDING = 17
