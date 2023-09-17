@@ -1,0 +1,4 @@
+> user: > hello?
+
+> J.A.R.V.I.S: Greetings! How may I assist you today?
+

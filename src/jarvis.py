@@ -1,4 +1,4 @@
-import frontend.app as jarvis_app
+import app as jarvis_app
 
 class Jarvis:
 

@@ -1,4 +1,4 @@
-src/system/config.py
+src/config.py
 /.idea
 /__pycache__
 /src/__pycache__
