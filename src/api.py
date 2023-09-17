@@ -61,7 +61,8 @@ class Agent:
         '''
         # get the path of the directory containing the Python file
         self.current_working_directory = os.path.dirname(os.path.realpath(__file__))
-        self.conversations_directory = self.current_working_directory + "/../Conversations"
+        self.conversations_directory = os.path.join(self.current_working_directory,
+                                                    '../Conversations')
 
         # create the 'Conversations' directory if it does not exist
         if not os.path.exists(self.conversations_directory):
